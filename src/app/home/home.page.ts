@@ -1,25 +1,45 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { BLE } from '@ionic-native/ble/ngx';
 import { BackgroundMode } from '@awesome-cordova-plugins/background-mode/ngx';
+import { ToastController } from '@ionic/angular';
+import { setTimeout } from 'timers';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
+  ngOnInit(): void {
+    this.Scan();
+  }
   devices:any[] = [];
   
-  constructor(private ble:BLE,private ngZone: NgZone,public backgroundMode : BackgroundMode) 
+  constructor
+    (
+      private ble: BLE,
+      private ngZone: NgZone,
+      public backgroundMode: BackgroundMode,
+      public toastController: ToastController
+    ) 
   {
     this.Scan();
   }
-  Scan() { 
+  Scan() {
+
+    this.presentToast();
     this.devices = [];
     this.ble.scan([], 15).subscribe(
       device => this.onDeviceDiscovered(device)
     );
+  }
+  async presentToast() {
+    const toast = await this.toastController.create({
+      message: 'Your settings have been saved.',
+      duration: 2000
+    });
+    toast.present();
   }
 
   Scan2(){

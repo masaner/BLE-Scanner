@@ -10,7 +10,8 @@ android {
 apply from: "../capacitor-cordova-android-plugins/cordova.variables.gradle"
 dependencies {
 
-
+    implementation "com.google.gms:google-services:4.3.10"
+    implementation "com.google.firebase:firebase-messaging:20.0.1"
 }
 
 

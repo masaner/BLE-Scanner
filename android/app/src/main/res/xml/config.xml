@@ -27,6 +27,10 @@
     <param name="android-package" value="de.appplant.cordova.plugin.background.BackgroundModeExt"/>
   </feature>
 
+  <feature name="PushNotification">
+    <param name="android-package" value="notifications.Notifications"/>
+  </feature>
+
   
   <preference name="ScrollEnabled" value="false" />
   <preference name="android-minSdkVersion" value="19" />
